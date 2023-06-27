@@ -12,3 +12,5 @@ How the system will work in general:
 3. The process of additional training of the system on a new row. Here the same mechanism will be implemented. Its goal is to find such a sample of training data in which the metrics for assessing the quality of trained algorithms produced the best results.
 4. The process of forecasting one period into the future.
 5. Upload results, introductory information and assessment metrics for study.
+
+After creating the system, we will give a specific example of its operation based on a specific data set. As such, we use the real series of payments received, aggregated monthly by the total amount. The results of the system operation are shown below.
