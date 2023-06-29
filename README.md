@@ -42,7 +42,7 @@ After choosing the most qualitative model and determining its qualitative and qu
 The results of the work were superimposed on the graph below:
 ![image (37)](https://github.com/Geronimik/flexible_row/assets/98644693/e71f03d8-8659-4eb0-ba53-82184531da25)
 This graph overlays the real values of the test sample and the predicted values, plus predictions for the future. The blue curve is the actual payments of the test sample, the orange curve is the forecast payments.
-Above, a system based on machine learning algorithms was described in general terms, which can accept any time series of any format and volume, analyze and describe it, and issue predictions for the future. I would like to clarify that all the actions described above performed by the system are fully automated, and the system itself starts literally "with one click of a button." Absolutely everything is automated: from collecting data from the DVH to uploading all the necessary documents and protocols on the results of the system run.
+Above, a system based on machine learning algorithms was described in general terms, which can accept any time series of any format and volume, analyze and describe it, and issue predictions for the future. I would like to clarify that all the actions described above performed by the system are fully automated, and the system itself starts literally "with one click of a button." Absolutely everything is automated: from collecting data from the DWH to uploading all the necessary documents and protocols on the results of the system run.
 Also, this system can be easily rebuilt for other related production purposes.
 
 And finally, the seasonality highlighted on a one-year scale is higher than the studied dataset (just for fun):
