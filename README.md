@@ -13,4 +13,26 @@ How the system will work in general:
 4. The process of forecasting one period into the future.
 5. Upload results, introductory information and assessment metrics for study.
 
-After creating the system, we will give a specific example of its operation based on a specific data set. As such, we use the real series of payments received, aggregated monthly by the total amount. The results of the system operation are shown below.
+After creating the system, we will give a specific example of its operation based on a specific data set. As such, we use the real series of payments received, aggregated monthly by the total amount. The results of the system operation are shown below:
+1. First, let's look at the structure of the series itself. We will display it on the chart, and in parallel with it we will display the moving average and the moving standard deviation:
+![image (30)](https://github.com/Geronimik/flexible_row/assets/98644693/17fec869-b12a-4d1f-a578-a9f68c958d64)
+In the chart below, the blue curve is in-kind payments (the scale is divided by 10^7)
+                 green curve - moving average of payments for 12 months
+                 orange curve - 12-month moving standard deviation
+2. Next, we will study the series using decomposition: look at its noisiness, study seasonality, and so on. When decomposing, a multiplicative decomposition model was used:
+First, let's look at the trend in order to get acquainted with the general trend of a series of payments, as well as to identify stationarity "approximately".
+![image (31)](https://github.com/Geronimik/flexible_row/assets/98644693/42ee17c1-e779-4c49-a82a-781de72d1ebf)
+From the trend line chart, a stable increase in the company's revenues until April-May 2018 is noticeable. Then the schedule goes to a plateau until 2020. This is due to the company's transition to a completely new work strategy and the consequences of this decision. Also, from April-May 2020 to April-May 2021, there is a steady stagnation of the chart. This is probably due to the consequences of the coronavirus pandemic: increased mortality, restriction of physical contact between people (which is very important in the work of the company), restrictions imposed on business by the state in connection with the rampant virus.
+In general, purely intuitively, this series cannot be called stationary, but this should be confirmed by tests, which will be done further.
+Next, let's look at the seasonality chart. It will be important to us when choosing a model, but now we will look at it purely informative:
+![image (32)](https://github.com/Geronimik/flexible_row/assets/98644693/53ba57a6-3e28-4195-82d9-311723b38440)
+Here seasonality is given for all years of the study, however, seasonality for any one year can be distinguished, since it is the same for each and, if necessary, consider it in detail.
+Let's move on to studying the data for noise. This is a very important component of the series, since the noise, in a sense, determines the purity of the data and its suitability for training machine learning models.
+![image (33)](https://github.com/Geronimik/flexible_row/assets/98644693/d18c41e3-f8a1-40b2-a4a4-652d807ffb08)
+In general, the noise level of the row is more or less even, and the noise level is not high, except for some points. There are 3 peaks in 2017, 2019 and 2020, the highest being in 2017.
+These peaks are well correlated in time with the peaks on the regular payment schedule. To identify the causes of these peaks, additional analysis is required, which cannot be provided here for some reason.
+3. Next, we will analyze the series for stationarity, since this is very important for choosing a model. You can do the analysis using the autocorrelation chart (shown below for reference), but I trust the Dickey-Fuller test more.
+![image (34)](https://github.com/Geronimik/flexible_row/assets/98644693/f1984438-76c1-4018-ad49-a790fa1ef14f)
+As mentioned above, I gave the analysis of the series for stationarity to the automated Dickey-Fuller test with a confidence interval of 5%. This test showed that the series is stationary.
+4. All the necessary parameters are defined, a number of primary and superficially studied, it's time to start selecting a model for training. As mentioned earlier, a special algorithm was developed for this purpose, which, by sequentially turning off older data, then retraining the ARIMA and SARIMAX models, enumerating their hyperparameters and measuring their quality, selects the most optimal set for training, the model, and the configuration of hyperparameters for it. For clarity, the model outputs the error function of the models for each set when combining hyperparameters, which gives the best quality in this case.
+![image (35)](https://github.com/Geronimik/flexible_row/assets/98644693/32eef971-3a6e-4420-ae30-50c1a297f59e)
